@@ -10,13 +10,17 @@ document.addEventListener('keydown', (event) => {
 
 document.addEventListener('click', (event) => {
     event.preventDefault();
-    const path = event.path;
+    console.log('event.path', event.composedPath());
+    const path = event.composedPath();
     let isLock = false;
     let node;
-    path.forEach((item) => {
+    console.log('path', path);
+    path?.forEach((item) => {
+        console.log('item?.dataset?.type', item?.dataset?.type);
         if(item?.dataset?.type === 'lock' && !isLock) {
             isLock = true;
             node = item.tagName.toLowerCase() === 'svg' ? item : item.children[0];
+            console.log('node', node);
         }        
     })
     node?.classList.toggle('fa-lock-open');
